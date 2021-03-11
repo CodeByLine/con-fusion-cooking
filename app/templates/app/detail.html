@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="container pt-0">
+
+    <div class="bg-codeblocks">
+        <div class="main-box-codeblocks">
+            
+            <div class="container pt-1">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="box-image-codeblocks">
+                            <div class="swiper-container gallery-top">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="product-image">
+                                            <img src="{{recipe.image.url}}" alt="{{recipe.name}}" class="img-fluid" style="width: 400px; height: auto;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h2 class="text-bold text-strong">{{ recipe.name|capfirst }} Recipe  {% if user.is_authenticated and request.user == recipe.author %}   <a href="{% url 'update' recipe.id %}"><i class="fas fa-edit mx-3"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete"><i class="fas fa-trash"></i></span> {% endif %}</h2>
+                        <span class="seller-name-codeblocks">
+                            <h5> <span class="text-muted">By</span> <a href="#" id="author">{{recipe.author}}</a></h5>
+                        </span>
+                        <br>
+                        <span class="description-codeblocks">
+                            <p>
+                                <strong>Description:</strong> <br>
+                                <span class="text-muted">
+                                    <p >{{recipe.description}}</p>
+                                </span>
+                            </p>
+                        </span>
+                        
+                        <span class="extras-codeblocks">
+                            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Quick Info</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ingredients-tab" data-toggle="tab" href="#ingredients" role="tab" aria-controls="ingredients" aria-selected="false">Ingredients</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="directions-tab" data-toggle="tab" href="#directions" role="tab" aria-controls="directions" aria-selected="false">Directions</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="note-tab" data-toggle="tab" href="#note" role="tab" aria-controls="note" aria-selected="false">Note</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <br>
+                                    <table style="width:50%;">
+                                        <tr>
+                                            <th>Servings:</th>
+                                            <td>{{ recipe.servings }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Prep:</th>
+                                            <td>{{ recipe.prep}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Cook:</th>
+                                            <td>{{ recipe.cook}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="ingredients" role="tabpanel" aria-labelledby="ingredients-tab">
+                                    {{ recipe.ingredients|safe|linebreaks }}
+                                </div>
+                                <div class="tab-pane fade" id="directions" role="tabpanel" aria-labelledby="directions-tab">
+                                    {{ recipe.directions|safe|linebreaks }}
+                                </div>
+
+                                <div class="tab-pane fade" id="note" role="tabpanel" aria-labelledby="note-tab">
+                                    {{recipe.description|safe|linebreaks}}
+                                </div>
+                                
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteLabel">Are you 100% sure?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Are you absolutely sure you want to delete the {{recipe.name|capfirst}} Recipe? The data will be erased from the database and will not be retrievable.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nevermind</button>
+            <a href="{% url 'delete' recipe.id %}"><button type="button" class="btn btn-primary">OK, Proceed</button></a>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+{% endblock %} 

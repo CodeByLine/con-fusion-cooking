@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<header class="jumbotron">
+  <h1 class="display-3 py-3 mx-5">A Warm Welcome!</h1>
+  <p class="lead mx-5">Browse through our collection of various Django-powered recipes.</p>
+  <hr class="mx-5">
+</header>
+
+<div class="row row-cols-1 row-cols-md-3 mx-4 g-5">
+  {% for recipe in recipes %}
+    <div class="col">
+      <div class="card-group">
+        <div class="card">
+          <a href="{% url 'detail' recipe.id %}"><img class="card-img-top" src="{{recipe.image.url}}" alt="{{recipe.name}}"></a>
+          <div class="card-body">
+            <h4 class="card-title"><a href="{% url 'detail' recipe.id %}" style="text-decoration: none;">{{recipe.name}}</a></h4>
+          <p class="card-text">{{recipe.description|truncatechars:65}}</p>
+          <p class="card-text">      
+            <small class="text-muted"><b>Prep Time: </b>{{recipe.prep}}</small><br>
+            <small class="text-muted"><b>Cook Time: </b>{{recipe.cook}}</small></p>
+          <div class="card-text">
+            <a href="{% url 'detail' recipe.id %}" class="btn btn-view">View</a>
+          </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
