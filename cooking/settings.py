@@ -154,4 +154,4 @@ try:
 except ImportError:
     print("Looks like no local file. You must be on production.")
     DEBUG = False
-    ALLOWED_HOSTS = ['con-fusion-cooking.herokuapp.com'] 
+    ALLOWED_HOSTS = ['frozen-fjord-60733.herokuapp.com'] 
