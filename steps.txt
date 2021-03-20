@@ -3,16 +3,16 @@ https://dev.to/vladyslavnua/how-to-build-a-django-web-app-from-scratch-tutorial-
 
 1. django-admin startproject [projectname] .
 
-2. add a root-level folder: templates
+2. # add a root-level folder: templates
 3. python3 -m venv ./venv
 4. source ./venv/bin/activate
-5. In settings.py:
+5. pip3 install django
+6. python3 -m pip install --upgrade pip
+7. # In settings.py:
     import os
     'DIRS': [os.path.join(BASE_DIR, 'templates')],
-6. pip3 install django
-7. python3 -m pip install --upgrade pip
 8. pip3 install whitenoise
-9. Add whitenoise to your MIDDLEWARE in 'settings.py':
+9. #Add whitenoise to MIDDLEWARE in 'settings.py':
     MIDDLEWARE = [
     ...
     'whitenoise.middleware.WhiteNoiseMiddleware',
