@@ -7,11 +7,11 @@ django-durationwidget==1.0.5
 django-markdownx==3.0.1
 gunicorn==20.0.4
 Markdown==3.3.4
-Pillow==8.1.2
+Pillow==9.3.0
 pycparser==2.20
 python-dotenv==0.15.0
 pytz==2021.1
 six==1.16.0
-sqlparse==0.4.1
-urllib3==1.26.5
+sqlparse==0.4.2
+urllib3==1.26.4
 whitenoise==5.2.0
